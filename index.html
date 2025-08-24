@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aprender o Alfabeto - Jogo para Crianças</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎯 Aprende o Alfabeto! 🎯</h1>
+            <div class="game-info">
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <span id="progressText">26 letras restantes</span>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <!-- Área de instruções -->
+            <div class="instruction-area" id="instructionArea">
+                <div class="current-letter" id="currentLetter">
+                    <span class="letter-display" id="letterDisplay">?</span>
+                </div>
+                <p class="instruction-text" id="instructionText">
+                    Clica em "Começar" para iniciares o jogo!
+                </p>
+                <button class="speak-button" id="speakButton" style="display: none;">
+                    🔊 Repetir Som
+                </button>
+            </div>
+
+            <!-- Grid de cartões com letras -->
+            <div class="letters-grid" id="lettersGrid">
+                <!-- Os cartões serão gerados dinamicamente pelo JavaScript -->
+            </div>
+
+            <!-- Botões de controlo -->
+            <div class="controls">
+                <button class="start-button" id="startButton">🚀 Começar Jogo</button>
+                <button class="reset-button" id="resetButton" style="display: none;">🔄 Novo Jogo</button>
+            </div>
+        </main>
+
+        <!-- Overlay de celebração -->
+        <div class="celebration-overlay" id="celebrationOverlay" style="display: none;">
+            <div class="celebration-content">
+                <h2>🎉 Parabéns! 🎉</h2>
+                <p>Conseguiste encontrar todas as letras!</p>
+                <p class="celebration-emoji">🌟 ⭐ 🌟 ⭐ 🌟</p>
+                <button class="celebration-button" id="playAgainButton">🎮 Jogar Outra Vez</button>
+            </div>
+        </div>
+
+        <!-- Feedback visual para acertos/erros -->
+        <div class="feedback" id="feedback"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

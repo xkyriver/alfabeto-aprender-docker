@@ -1,0 +1,40 @@
+{
+  "name": "alfabeto-aprender",
+  "version": "1.0.0",
+  "description": "Jogo interativo para crianças aprenderem o alfabeto português com som e animações",
+  "main": "index.html",
+  "scripts": {
+    "start": "start index.html",
+    "version": "echo Versão atual: && node -p \"require('./package.json').version\"",
+    "version:patch": "npm version patch --no-git-tag-version",
+    "version:minor": "npm version minor --no-git-tag-version",
+    "version:major": "npm version major --no-git-tag-version"
+  },
+  "keywords": [
+    "educação",
+    "crianças",
+    "alfabeto",
+    "português",
+    "jogo",
+    "interativo",
+    "tablet",
+    "web-app"
+  ],
+  "author": "Projeto Educativo",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/[SEU-USUARIO]/alfabeto-aprender.git"
+  },
+  "homepage": "https://[SEU-USUARIO].github.io/alfabeto-aprender",
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "devDependencies": {},
+  "dependencies": {},
+  "config": {
+    "target_audience": "crianças 5-7 anos",
+    "language": "português",
+    "platform": "web/tablet"
+  }
+}
