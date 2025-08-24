@@ -1,11 +1,13 @@
 /*
  * Alfabeto Aprender - Jogo Educativo Interativo
  * Autor: xkyriver
- * Versão: 1.0.1
+ * Versão: 1.1.0
  * Licença: MIT
  * 
  * Jogo interativo para crianças aprenderem o alfabeto português
  * com som, animações e feedback visual.
+ * 
+ * Versão 1.1.0: Implementação de Google TTS para letra O
  */
 
 // Estado do jogo
@@ -237,13 +239,24 @@ class AlphabetGame {
         
         // Aguardar um pouco para garantir que parou
         setTimeout(() => {
+            // Estratégia especial para o U - tentar múltiplas variantes
+            if (this.currentLetter === 'U') {
+                this.speakLetterU();
+                return;
+            }
+            
+            // Estratégia especial para o O - usar Google TTS PT-PT
+            if (this.currentLetter === 'O') {
+                this.speakLetterO();
+                return;
+            }
+            
             // Mapeamento de pronúncia correta para português europeu
             const pronunciationMap = {
-                'A': 'áááá',      // Som "á" mais longo
-                'E': 'éééé',      // Som "é" em vez de "i"
-                'I': 'ííí',       // Som "í" 
-                'O': 'óóóó',      // Som "ó" mais longo
-                'U': 'úúúú'       // Som "ú" mais longo
+                'A': 'á',      // Som "á" (vamos usar configurações para arrastar)
+                'E': 'é',      // Som "é" em vez de "i"
+                'I': 'í',      // Som "í" 
+                'O': 'ó'       // Som "ó" (vamos usar configurações para arrastar)
             };
             
             // Usar pronunciação customizada para vogais ou letra original para consoantes
@@ -260,9 +273,15 @@ class AlphabetGame {
             
             // Configurações de fala otimizadas para vogais
             if (pronunciationMap[this.currentLetter]) {
-                // Configurações especiais para vogais
-                this.speechUtterance.rate = 0.5;  // Ainda mais lento para vogais
-                this.speechUtterance.pitch = 1.2; // Tom ligeiramente mais baixo
+                if (this.currentLetter === 'U') {
+                    // Configurações especiais para U (mais audível)
+                    this.speechUtterance.rate = 0.15; // Ainda mais lento para U
+                    this.speechUtterance.pitch = 1.3; // Tom mais alto para U
+                } else {
+                    // Configurações para outras vogais
+                    this.speechUtterance.rate = 0.2;  // Extremamente lento para vogais
+                    this.speechUtterance.pitch = 1.1; // Tom ligeiramente mais baixo
+                }
             } else {
                 // Configurações normais para consoantes
                 this.speechUtterance.rate = 0.7;
@@ -290,22 +309,208 @@ class AlphabetGame {
                 this.showLetterFallback();
             };
             
-            // Falar com retry
+            // Falar sem retry automático
             try {
                 this.speechSynthesis.speak(this.speechUtterance);
-                
-                // Backup: se não falar em 2 segundos, tentar novamente
-                setTimeout(() => {
-                    if (this.speechSynthesis.speaking === false && this.speechSynthesis.pending === false) {
-                        console.log('Tentando falar novamente...');
-                        this.speechSynthesis.speak(this.speechUtterance);
-                    }
-                }, 2000);
             } catch (error) {
                 console.error('Erro ao tentar falar:', error);
                 this.showLetterFallback();
             }
         }, 100);
+    }
+    
+    // Método especializado para o U - usando configuração escolhida: U4 - Ditongo
+    speakLetterU() {
+        console.log('🎯 Reproduzindo letra U com configuração otimizada: U4 - Ditongo');
+        
+        // Usar a configuração testada e aprovada: "ou" (ditongo português)
+        const textToSpeak = 'ou';
+        
+        this.speechUtterance = new SpeechSynthesisUtterance(textToSpeak);
+        
+        // Usar voz selecionada se disponível
+        if (this.selectedVoice) {
+            this.speechUtterance.voice = this.selectedVoice;
+        }
+        
+        // Configurações específicas do U4 - Ditongo
+        this.speechUtterance.rate = 0.15;  // Velocidade do teste U4
+        this.speechUtterance.pitch = 1.1;  // Tom do teste U4
+        this.speechUtterance.volume = 1.0; // Volume máximo
+        this.speechUtterance.lang = 'pt-PT';
+        
+        // Event handlers (sem timeout problemático)
+        this.speechUtterance.onstart = () => {
+            console.log('🎯 Iniciando reprodução: U4 - Ditongo ("ou")');
+        };
+        
+        this.speechUtterance.onend = () => {
+            console.log('🎯 U4 - Ditongo reproduzido com sucesso');
+        };
+        
+        this.speechUtterance.onerror = (e) => {
+            console.error('🎯 Erro na reprodução do U4 - Ditongo:', e);
+            // Só usar fallback se realmente houve erro crítico
+            if (e.error && e.error !== 'interrupted' && e.error !== 'canceled') {
+                console.log('🎯 Usando fallback Web Audio devido ao erro crítico:', e.error);
+                this.speakLetterUWithAudio();
+            } else {
+                console.log('🎯 Erro ignorado (interrupted/canceled):', e.error);
+            }
+        };
+        
+        // Reproduzir a configuração escolhida (sem timeout)
+        try {
+            this.speechSynthesis.speak(this.speechUtterance);
+        } catch (error) {
+            console.error('🎯 Exceção ao reproduzir U4 - Ditongo:', error);
+            // Fallback para Web Audio API apenas em caso de exceção real
+            this.speakLetterUWithAudio();
+        }
+    }
+    
+    // Método especializado para o O - usando Google TTS PT-PT
+    speakLetterO() {
+        console.log('🌐 Reproduzindo letra O com Google TTS PT-PT: O56');
+        
+        // Criar elemento de áudio para Google TTS
+        const audioElement = new Audio();
+        const textToSpeak = 'ó';
+        const encodedText = encodeURIComponent(textToSpeak);
+        const googleTTSUrl = `https://translate.google.com/translate_tts?ie=UTF-8&tl=pt&client=tw-ob&q=${encodedText}`;
+        
+        audioElement.src = googleTTSUrl;
+        audioElement.volume = 1.0;
+        
+        audioElement.onloadstart = () => {
+            console.log('🌐 Carregando Google TTS para letra O...');
+        };
+        
+        audioElement.onplay = () => {
+            console.log('🌐 Google TTS O56 iniciado: "ó" (pt-PT)');
+        };
+        
+        audioElement.onended = () => {
+            console.log('🌐 Google TTS O56 concluído com sucesso');
+        };
+        
+        audioElement.onerror = (error) => {
+            console.error('🌐 Erro Google TTS O56:', error);
+            console.log('🌐 Usando fallback para síntese local...');
+            // Fallback para síntese local
+            this.speakLetterOFallback();
+        };
+        
+        try {
+            audioElement.play();
+        } catch (error) {
+            console.error('🌐 Erro ao reproduzir Google TTS O56:', error);
+            // Fallback para síntese local
+            this.speakLetterOFallback();
+        }
+    }
+    
+    // Fallback para letra O usando síntese local
+    speakLetterOFallback() {
+        console.log('🔄 Usando fallback local para letra O');
+        
+        this.speechUtterance = new SpeechSynthesisUtterance('ó');
+        
+        if (this.selectedVoice) {
+            this.speechUtterance.voice = this.selectedVoice;
+        }
+        
+        // Configurações otimizadas para O
+        this.speechUtterance.rate = 0.2;
+        this.speechUtterance.pitch = 1.1;
+        this.speechUtterance.volume = 1.0;
+        this.speechUtterance.lang = 'pt-PT';
+        
+        this.speechUtterance.onstart = () => {
+            console.log('🔄 Fallback local O iniciado');
+        };
+        
+        this.speechUtterance.onend = () => {
+            console.log('🔄 Fallback local O concluído');
+        };
+        
+        this.speechUtterance.onerror = (e) => {
+            console.error('🔄 Erro no fallback local O:', e);
+        };
+        
+        try {
+            this.speechSynthesis.speak(this.speechUtterance);
+        } catch (error) {
+            console.error('🔄 Exceção no fallback local O:', error);
+        }
+    }
+    
+    // Fallback usando Web Audio API para criar som do U artificialmente
+    speakLetterUWithAudio() {
+        console.log('🎵 Criando som do U com Web Audio API');
+        
+        try {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            
+            if (audioContext.state === 'suspended') {
+                audioContext.resume();
+            }
+            
+            // Criar som vowel-like para U (som grave e prolongado)
+            const duration = 1.5; // 1.5 segundos
+            const startTime = audioContext.currentTime;
+            
+            // Frequência fundamental para som de U (aproximadamente 300Hz)
+            const fundamentalFreq = 300;
+            
+            // Criar harmônicos para som mais natural
+            const harmonics = [
+                { freq: fundamentalFreq, gain: 0.8 },      // Fundamental
+                { freq: fundamentalFreq * 2, gain: 0.4 },  // 2ª harmônica
+                { freq: fundamentalFreq * 3, gain: 0.2 },  // 3ª harmônica
+                { freq: fundamentalFreq * 4, gain: 0.1 }   // 4ª harmônica
+            ];
+            
+            harmonics.forEach((harmonic, index) => {
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                const filter = audioContext.createBiquadFilter();
+                
+                // Conectar: oscillator → filter → gain → destination
+                oscillator.connect(filter);
+                filter.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                // Configurar oscilador
+                oscillator.frequency.value = harmonic.freq;
+                oscillator.type = 'sine';
+                
+                // Configurar filtro para som mais natural
+                filter.type = 'lowpass';
+                filter.frequency.value = 800; // Cortar frequências agudas
+                filter.Q.value = 1;
+                
+                // Envelope de amplitude (fade in/out)
+                gainNode.gain.setValueAtTime(0, startTime);
+                gainNode.gain.linearRampToValueAtTime(harmonic.gain, startTime + 0.1);
+                gainNode.gain.linearRampToValueAtTime(harmonic.gain * 0.8, startTime + duration - 0.2);
+                gainNode.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
+                
+                // Iniciar e parar
+                oscillator.start(startTime);
+                oscillator.stop(startTime + duration);
+            });
+            
+            // Mostrar feedback visual
+            this.showFeedback('🎵 Letra U (áudio sintético)', 'correct');
+            
+            console.log('🎵 Som do U criado artificialmente');
+            
+        } catch (e) {
+            console.error('🎵 Erro ao criar som do U com Web Audio API:', e);
+            // Fallback final
+            this.showLetterFallback();
+        }
     }
     
     showLetterFallback() {
@@ -483,6 +688,27 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, { passive: false });
     
+    // Detector de combinações secretas
+    let secretSequence = '';
+    
+    document.addEventListener('keydown', (e) => {
+        // Adicionar tecla à sequência
+        secretSequence += e.key.toLowerCase();
+        
+        // Manter apenas os últimos 6 caracteres
+        if (secretSequence.length > 6) {
+            secretSequence = secretSequence.slice(-6);
+        }
+        
+        // Código "rabbit" - Backdoor completo
+        if (secretSequence === 'rabbit') {
+            console.log('🔍 Código "rabbit" detetado! Abrindo backdoor completo...');
+            window.open('backdoor.html', '_blank', 'width=1200,height=800');
+            secretSequence = '';
+        }
+        
+    });
+    
     // Adicionar indicador de carregamento de vozes
     if ('speechSynthesis' in window) {
         // Aguardar carregamento das vozes
@@ -497,5 +723,9 @@ document.addEventListener('DOMContentLoaded', () => {
         checkVoices();
     }
     
-    console.log('🎯 Jogo do Alfabeto inicializado com sucesso!');
+    console.log('🎯 Jogo do Alfabeto inicializado com sucesso! - Versão 1.1.0');
+    console.log('✅ Letra U configurada: U4 - Ditongo ("ou") - Rate: 0.15, Pitch: 1.1');
+    console.log('🌐 Letra O configurada: Google TTS PT-PT ("ó") com fallback local');
+    console.log('🔑 Código secreto disponível:');
+    console.log('  - "rabbit" → Backdoor para testes de som');
 });

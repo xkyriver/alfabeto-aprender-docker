@@ -1,0 +1,257 @@
+/*
+ * Alfabeto Aprender - Backdoor de Testes
+ * Autor: xkyriver
+ * Versão: 1.0.1
+ * Licença: MIT
+ * 
+ * Estilos para página secreta de testes - fundo preto, visual técnico
+ */
+
+/* Reset e configurações globais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Courier New', monospace, Arial, sans-serif;
+    background: #000000; /* Fundo preto para indicar página de teste */
+    color: #00FF00; /* Texto verde tipo terminal */
+    min-height: 100vh;
+    padding: 10px;
+    overflow-x: hidden;
+}
+
+/* Container principal */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: #111111;
+    border: 2px solid #00FF00;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 20px #00FF00;
+    min-height: calc(100vh - 20px);
+}
+
+/* Header */
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #333333;
+    padding-bottom: 20px;
+}
+
+header h1 {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    color: #FF0000; /* Vermelho para destacar que é backdoor */
+    text-shadow: 2px 2px 4px rgba(255, 0, 0, 0.3);
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+}
+
+.subtitle {
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    color: #FFFF00; /* Amarelo para instruções */
+    margin-bottom: 15px;
+}
+
+.test-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+#testInfo {
+    font-size: 1rem;
+    color: #00FFFF; /* Ciano para status */
+    font-weight: bold;
+}
+
+.close-button {
+    background: #FF0000;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid #FFFFFF;
+}
+
+.close-button:hover {
+    background: #CC0000;
+    box-shadow: 0 0 10px #FF0000;
+}
+
+/* Grid de letras para teste */
+.letters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 15px;
+    max-width: 800px;
+    margin: 0 auto 30px;
+    padding: 20px;
+}
+
+.letter-card {
+    aspect-ratio: 1;
+    background: linear-gradient(135deg, #333333, #555555);
+    border: 2px solid #00FF00;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: bold;
+    color: #FFFFFF;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    user-select: none;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+    font-family: 'Courier New', monospace;
+}
+
+.letter-card:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.6);
+    background: linear-gradient(135deg, #444444, #666666);
+    border-color: #00FFFF;
+}
+
+.letter-card:active {
+    transform: translateY(-1px) scale(0.95);
+    box-shadow: 0 0 15px rgba(255, 255, 0, 0.5);
+}
+
+.letter-card.testing {
+    animation: testingPulse 1s ease;
+    background: linear-gradient(135deg, #FF6600, #FF9900);
+    border-color: #FFFF00;
+    color: #000000;
+}
+
+@keyframes testingPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+/* Painel de debug */
+.debug-info {
+    background: #1A1A1A;
+    border: 1px solid #444444;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 30px;
+}
+
+.debug-info h3 {
+    color: #FFFF00;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+.debug-panel {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 15px;
+}
+
+.debug-item {
+    background: #222222;
+    padding: 10px;
+    border-radius: 5px;
+    border-left: 4px solid #00FF00;
+}
+
+.debug-item strong {
+    color: #00FFFF;
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+}
+
+.debug-item span {
+    color: #FFFFFF;
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    word-break: break-all;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+        border-radius: 8px;
+    }
+    
+    .letters-grid {
+        grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+        gap: 10px;
+        padding: 15px;
+    }
+    
+    .debug-panel {
+        grid-template-columns: 1fr;
+    }
+    
+    .test-info {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 5px;
+    }
+    
+    .container {
+        padding: 10px;
+    }
+    
+    .letters-grid {
+        grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+        gap: 8px;
+        padding: 10px;
+    }
+}
+
+/* Melhorar touch targets para dispositivos móveis */
+@media (hover: none) and (pointer: coarse) {
+    .letter-card {
+        min-height: 80px;
+        min-width: 80px;
+    }
+    
+    .close-button {
+        min-height: 44px;
+        padding: 12px 20px;
+    }
+}
+
+/* Efeito de scanlines para dar aspeto mais técnico */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        repeating-linear-gradient(
+            0deg,
+            rgba(0, 255, 0, 0.02),
+            rgba(0, 255, 0, 0.02) 1px,
+            transparent 1px,
+            transparent 2px
+        );
+    pointer-events: none;
+    z-index: -1;
+}

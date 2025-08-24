@@ -5,6 +5,38 @@ Todas as mudanças notáveis neste projeto serão documentadas neste ficheiro.
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt/1.0.0/),
 e este projeto adere ao [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2025-08-24
+
+### ✨ Adicionado
+- **Google TTS integrado** para letra "O" com qualidade superior
+- **Sistema de fallback automático** para garantir funcionamento sempre
+- **Métodos especializados** para letras problemáticas (U e O)
+- **Logs detalhados** com emojis para debug mais fácil
+
+### 🔄 Mudado
+- **Letra O** agora usa Google Text-to-Speech PT-PT como primeira opção
+- **Letra U** mantém configuração otimizada "U4 - Ditongo" ("ou")
+- **Arquitetura melhorada** com métodos especializados por letra
+- **Fallback robusto** com síntese local se serviço online falhar
+
+### 🗑️ Removido
+- **Páginas de teste** antigas (`test-u.html`, `test-vowels.html`)
+- **Códigos secretos** obsoletos ("testu", "vowels")
+- **Scripts de teste** não utilizados
+
+### 🎯 Técnico
+- **Método `speakLetterO()`** com integração Google TTS
+- **Método `speakLetterOFallback()`** para backup local
+- **Audio Element API** para reprodução de TTS online
+- **Tratamento de erros** melhorado com logs informativos
+- **Código limpo** com remoção de funcionalidades obsoletas
+
+### 🌍 Qualidade de Som
+- **Letra O** - Pronunciação PT-PT autêntica via Google TTS
+- **Letra U** - Mantém "ou" (ditongo) com rate 0.15 e pitch 1.1
+- **Fallbacks automáticos** garantem funcionamento mesmo offline
+- **Volume otimizado** (1.0) para máxima clareza
+
 ## [1.0.1] - 2025-08-24
 
 ### 🐛 Corrigido
