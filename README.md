@@ -82,8 +82,9 @@ alfabeto-aprender/
 - **HTML5** - Estrutura semântica
 - **CSS3** - Estilos modernos, animações e responsividade
 - **JavaScript ES6+** - Lógica interativa e orientada a objectos
-- **Web Speech API** - Síntese de voz para português
-- **Web Audio API** - Sons personalizados
+- **Ficheiros MP3** - Sistema de áudio estático uniformizado
+- **Google TTS PT-PT** - Geração de áudio de qualidade profissional
+- **PowerShell** - Scripts de automação para geração de áudio
 
 ## 📋 Requisitos
 
@@ -93,10 +94,11 @@ alfabeto-aprender/
 - ✅ Safari 11+
 - ✅ Edge 79+
 
-### **Funcionalidades Opcionais**
-- 🔊 **Áudio**: Para melhor experiência (funciona sem, mas recomendado)
+### **Funcionalidades Garantidas**
+- 🎵 **Áudio MP3**: Sistema integrado - funciona sempre offline
 - 📱 **Touch**: Otimizado para dispositivos touch
-- 🌐 **Ligação à internet**: Não necessária (funciona offline)
+- 🌐 **Offline completo**: Todos os ficheiros inclusos, zero dependências externas
+- 🔊 **Compatibilidade universal**: Speakers, phones, todos os dispositivos
 
 ## 🎯 Público-Alvo
 
@@ -154,7 +156,8 @@ Este projeto está licenciado sob a **MIT License** - vê o ficheiro `LICENSE` p
 
 - **Crianças** que inspiraram este projeto
 - **Educadores** que forneceram feedback valioso
-- **Web Speech API** pela síntese de voz
+- **Google Text-to-Speech** pela qualidade de áudio PT-PT
+- **Comunidade PowerShell** pelos scripts de automação
 - **Comunidade open source** pelas ferramentas utilizadas
 
 ---
