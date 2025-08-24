@@ -1,18 +1,16 @@
 /*
  * Alfabeto Aprender - Jogo Educativo Interativo
  * Autor: xkyriver
- * Versão: 2.1.0 - MP3 Edition
+ * Versão: 2.0.0 - MP3 Edition
  * Licença: MIT
  * 
  * Jogo interativo para crianças aprenderem o alfabeto português
  * com sons uniformes MP3 PT-PT, animações e feedback visual.
  * 
- * Versão 2.1.0: Sistema MP3 completo + Letra A corrigida
+ * Versão 2.0.0: Sistema completamente renovado usando ficheiros MP3
  * - Resolve problemas de conflito de canais de áudio
  * - Uniformidade total em PT-PT via Google TTS
  * - Compatibilidade perfeita speakers vs phones
- * - Letra A corrigida com som "á" português correto
- * - Sistema backdoor removido para versão final limpa
  */
 
 // Estado do jogo
@@ -367,7 +365,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Sistema de áudio MP3 inicializado
     
-    console.log('🎯 Jogo do Alfabeto inicializado com sucesso! - Versão 2.1.0 MP3 Edition');
+    console.log('🎯 Jogo do Alfabeto inicializado com sucesso! - Versão 2.0.0 MP3 Edition');
     console.log('🎵 Sistema de áudio: Ficheiros MP3 uniformes Google TTS PT-PT');
     console.log('✅ Resolução de conflitos: Speakers vs Phones');
     console.log('🔧 Total de ficheiros: 26 letras + 4 sons de feedback');

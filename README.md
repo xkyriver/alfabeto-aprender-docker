@@ -1,11 +1,13 @@
 # 🎯 Alfabeto Aprender - Jogo Educativo Interativo
 
-![Versão](https://img.shields.io/badge/versão-1.1.0-blue)
+![Versão](https://img.shields.io/badge/versão-2.1.0_MP3-blue)
 ![Licença](https://img.shields.io/badge/licença-MIT-green)
 ![Plataforma](https://img.shields.io/badge/plataforma-Web%2FTablet-orange)
-![Qualidade](https://img.shields.io/badge/qualidade_som-Google_TTS-brightgreen)
+![Qualidade](https://img.shields.io/badge/qualidade_som-MP3_PT--PT-brightgreen)
 
 Uma aplicação web interativa e divertida para ajudar crianças do primeiro ano a aprender o alfabeto português através de jogos com som, animações e feedback visual.
+
+🎵 **Nova Versão 2.1.0 MP3**: Sistema de áudio completamente renovado com ficheiros MP3 uniformes em PT-PT, eliminando conflitos entre speakers/phones e garantindo qualidade profissional.
 
 ## 🌟 Funcionalidades
 
@@ -15,14 +17,14 @@ Uma aplicação web interativa e divertida para ajudar crianças do primeiro ano
 - **Cartões desaparecem** quando acertados (feedback visual claro)
 - **Barra de progresso** mostrando letras restantes
 
-### 🔊 **Áudio e Síntese de Voz**
-- **Pronunciação automática** das letras em português
-- **Google Text-to-Speech** para letra "O" com qualidade PT-PT superior
-- **Sistema de fallback automático** garante funcionamento offline
+### 🔊 **Sistema de Áudio MP3 (v2.1.0)**
+- **30 ficheiros MP3 uniformes** - 26 letras + 4 sons de feedback
+- **100% Google TTS PT-PT** para consistência total
+- **Letra A corrigida** com som "á" português correto
+- **Zero conflitos de canal** - funciona igual em speakers e phones
+- **Pré-carregamento inteligente** para resposta instantânea
+- **Compatibilidade universal** - todos os navegadores e dispositivos
 - **Botão para repetir** o som da letra atual
-- **Vozes portuguesas** quando disponíveis
-- **Sons personalizados** de sucesso, erro e vitória
-- **Métodos especializados** para letras problemáticas (U, O)
 
 ### ✨ **Animações e Feedback**
 - **Animações suaves** para acertos e erros
@@ -51,24 +53,28 @@ Uma aplicação web interativa e divertida para ajudar crianças do primeiro ano
 5. 🎉 Celebra quando completares todas as letras!
 
 ### **Funcionalidades Avançadas**
-- 🔍 **Sistema de Testes**: Durante o jogo, digita `rabbit` para aceder ao backdoor de testes
-- 🔊 **Teste Individual**: Testa o som de qualquer letra individualmente
-- 🛠️ **Informações Debug**: Vê detalhes técnicos sobre vozes e configurações
-- 🌐 **Qualidade Superior**: Letra "O" usa Google TTS para máxima qualidade
+- 🧪 **Página de Testes**: Abre `test-audio.html` para testar sons individualmente
+- 🔊 **Teste Individual**: Testa cada letra e som de feedback separadamente
+- 📊 **Testes Automáticos**: Reproduz todas as letras sequencialmente
+- 🎵 **Sistema MP3 Profissional**: Qualidade de estúdio em todos os sons
 
 ## 🛠 Estrutura do Projeto
 
 ```
 alfabeto-aprender/
-├── 📄 index.html      # Estrutura principal da aplicação
-├── 🎨 styles.css      # Estilos e animações
-├── ⚙️ script.js       # Lógica do jogo e interatividade
-├── 🔍 backdoor.html   # Página de testes de som
-├── 🔍 backdoor.js     # Sistema de testes debug
-├── 🎨 backdoor.css    # Estilos da página de testes
-├── 📋 README.md       # Documentação (este ficheiro)
-├── 📦 package.json    # Metadados e versionamento
-└── 📈 CHANGELOG.md    # Histórico de versões
+├── 📄 index.html                 # Estrutura principal da aplicação
+├── 🎨 styles.css                 # Estilos e animações
+├── ⚙️ script.js                  # Lógica do jogo (v2.1.0 MP3)
+├── 🧪 test-audio.html           # Página de testes de áudio
+├── 💾 script-original-backup.js # Backup do sistema original
+├── 💾 script-mp3.js             # Versão MP3 alternativa
+├── 🎵 audio/                   # Pasta de ficheiros MP3
+│   ├── letters/               # 26 ficheiros de letras (A.mp3-Z.mp3)
+│   └── sounds/                # 4 ficheiros de feedback
+├── 🛠️ generate_audio_fixed.ps1   # Gerador completo MP3
+├── 📋 README.md                # Documentação (este ficheiro)
+├── 📋 README-MP3.md           # Documentação técnica MP3
+└── 📋 LETRA-A-CORRIGIDA.md   # Relatório final
 ```
 
 ## 🔧 Tecnologias Utilizadas
@@ -102,13 +108,25 @@ alfabeto-aprender/
 
 Este projeto segue **Semantic Versioning** (`MAJOR.MINOR.PATCH`):
 
-### **v1.1.0** (Atual) - Qualidade de Som Melhorada
+### **v2.1.0** (Atual) - MP3 Edition + Letra A Corrigida
+- 🎵 **Sistema MP3 completo** - 30 ficheiros uniformes Google TTS PT-PT
+- ✅ **Letra A corrigida** - Som "á" português correto
+- 🚫 **Backdoor removido** - Versão final limpa e profissional
+- 🔊 **Zero conflitos** - Compatibilidade total speakers vs phones
+- ⚡ **Performance otimizada** - Pré-carregamento inteligente
+- 🧪 **Página de testes** - `test-audio.html` para validação
+
+### **v2.0.0** - Sistema MP3 Revolucionário
+- 🎵 **Ficheiros MP3 uniformes** substituíram síntese em tempo real
+- 🌐 **Google TTS PT-PT** para todas as letras e sons
+- 📊 **Página de testes** com variações da letra A
+- 🛠️ **Scripts PowerShell** para geração automática
+
+### **v1.1.0** - Qualidade de Som Melhorada
 - ✨ **Google Text-to-Speech** integrado para letra "O"
 - ✨ **Sistema de testes** com backdoor para debug
 - ✨ **Fallback automático** garante funcionamento offline
 - ✨ **Métodos especializados** para letras problemáticas
-- ✨ **Arquitetura robusta** com tratamento de erros
-- ✨ **Logs informativos** para monitorização
 
 ### **v1.0.1** - Correções de Pronunciação
 - 🐛 Pronunciação das vogais melhorada (A, E, I, O, U)

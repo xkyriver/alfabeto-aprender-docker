@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste de Áudio MP3 - Alfabeto</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        h1 { text-align: center; }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover { background: #45a049; }
+        .letters-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .letter-btn {
+            background: #FF6B6B;
+            height: 50px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .feedback {
+            text-align: center;
+            font-size: 18px;
+            margin: 10px 0;
+            height: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎵 Teste de Áudio MP3 - Alfabeto PT-PT</h1>
+        
+        <div class="test-section">
+            <h3>📝 Teste das Letras (A-Z)</h3>
+            <div class="letters-grid" id="lettersGrid">
+                <!-- Botões das letras serão gerados aqui -->
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h3>🔊 Teste dos Sons de Feedback</h3>
+            <button onclick="testSound('success')">✅ Sucesso</button>
+            <button onclick="testSound('error')">❌ Erro</button>
+            <button onclick="testSound('victory')">🎉 Vitória</button>
+            <button onclick="testSound('find_letter')">🔍 Encontra Letra</button>
+        </div>
+        
+        <div class="test-section">
+            <h3>🧪 Testes Automáticos</h3>
+            <button onclick="testAllLetters()">🔄 Testar Todas as Letras</button>
+            <button onclick="testAllSounds()">🎶 Testar Todos os Sons</button>
+            <button onclick="stopAllAudio()">⏹️ Parar Tudo</button>
+        </div>
+        
+        <div class="feedback" id="feedback"></div>
+    </div>
+
+    <script>
+        // Sistema de áudio
+        const audioElements = {};
+        let isTestingInProgress = false;
+
+        // Pré-carregar todos os áudios
+        function preloadAudio() {
+            console.log('🎵 Carregando ficheiros MP3...');
+            
+            // Letras A-Z
+            'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').forEach(letter => {
+                const audio = new Audio(`audio/letters/${letter}.mp3`);
+                audio.preload = 'auto';
+                audioElements[`letter_${letter}`] = audio;
+                
+                audio.addEventListener('error', () => {
+                    console.error(`❌ Erro ao carregar: ${letter}.mp3`);
+                });
+                
+                audio.addEventListener('canplaythrough', () => {
+                    console.log(`✅ ${letter}.mp3 carregado`);
+                });
+            });
+            
+            // Sons de feedback
+            const soundFiles = ['success', 'error', 'victory', 'find_letter'];
+            soundFiles.forEach(sound => {
+                const audio = new Audio(`audio/sounds/${sound}.mp3`);
+                audio.preload = 'auto';
+                audioElements[sound] = audio;
+                
+                audio.addEventListener('error', () => {
+                    console.error(`❌ Erro ao carregar: ${sound}.mp3`);
+                });
+                
+                audio.addEventListener('canplaythrough', () => {
+                    console.log(`✅ ${sound}.mp3 carregado`);
+                });
+            });
+        }
+
+        // Reproduzir áudio
+        function playAudio(key) {
+            if (!audioElements[key]) {
+                showFeedback(`❌ Áudio não encontrado: ${key}`, 'error');
+                return;
+            }
+
+            const audio = audioElements[key];
+            audio.currentTime = 0;
+            
+            audio.play()
+                .then(() => {
+                    showFeedback(`🔊 Reproduzindo: ${key}`, 'success');
+                })
+                .catch(error => {
+                    showFeedback(`❌ Erro: ${error.message}`, 'error');
+                });
+        }
+
+        // Testar uma letra
+        function testLetter(letter) {
+            if (isTestingInProgress) return;
+            playAudio(`letter_${letter}`);
+        }
+
+        // Testar um som
+        function testSound(sound) {
+            if (isTestingInProgress) return;
+            playAudio(sound);
+        }
+
+        // Mostrar feedback
+        function showFeedback(message, type) {
+            const feedback = document.getElementById('feedback');
+            feedback.textContent = message;
+            feedback.style.color = type === 'error' ? '#ff4444' : '#44ff44';
+            
+            setTimeout(() => {
+                feedback.textContent = '';
+            }, 3000);
+        }
+
+        // Testar todas as letras sequencialmente
+        function testAllLetters() {
+            if (isTestingInProgress) {
+                showFeedback('⚠️ Teste já em progresso...', 'error');
+                return;
+            }
+
+            isTestingInProgress = true;
+            const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+            let currentIndex = 0;
+
+            function playNextLetter() {
+                if (currentIndex >= letters.length) {
+                    isTestingInProgress = false;
+                    showFeedback('✅ Teste de letras concluído!', 'success');
+                    return;
+                }
+
+                const letter = letters[currentIndex];
+                showFeedback(`🔊 Testando letra: ${letter}`, 'success');
+                playAudio(`letter_${letter}`);
+                currentIndex++;
+
+                setTimeout(playNextLetter, 2000); // Espera 2 segundos entre letras
+            }
+
+            playNextLetter();
+        }
+
+        // Testar todos os sons sequencialmente
+        function testAllSounds() {
+            if (isTestingInProgress) {
+                showFeedback('⚠️ Teste já em progresso...', 'error');
+                return;
+            }
+
+            isTestingInProgress = true;
+            const sounds = ['success', 'error', 'victory', 'find_letter'];
+            let currentIndex = 0;
+
+            function playNextSound() {
+                if (currentIndex >= sounds.length) {
+                    isTestingInProgress = false;
+                    showFeedback('✅ Teste de sons concluído!', 'success');
+                    return;
+                }
+
+                const sound = sounds[currentIndex];
+                showFeedback(`🔊 Testando som: ${sound}`, 'success');
+                playAudio(sound);
+                currentIndex++;
+
+                setTimeout(playNextSound, 3000); // Espera 3 segundos entre sons
+            }
+
+            playNextSound();
+        }
+
+        // Parar todos os áudios
+        function stopAllAudio() {
+            Object.values(audioElements).forEach(audio => {
+                audio.pause();
+                audio.currentTime = 0;
+            });
+            isTestingInProgress = false;
+            showFeedback('⏹️ Todos os áudios parados', 'success');
+        }
+
+        // Criar botões das letras
+        function createLetterButtons() {
+            const grid = document.getElementById('lettersGrid');
+            'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').forEach(letter => {
+                const btn = document.createElement('button');
+                btn.textContent = letter;
+                btn.className = 'letter-btn';
+                btn.onclick = () => testLetter(letter);
+                grid.appendChild(btn);
+            });
+        }
+
+        // Inicializar quando a página carregar
+        document.addEventListener('DOMContentLoaded', () => {
+            createLetterButtons();
+            preloadAudio();
+            showFeedback('🎵 Sistema de teste carregado!', 'success');
+        });
+    </script>
+</body>
+</html>
