@@ -1,6 +1,6 @@
 {
   "name": "alfabeto-aprender",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Jogo interativo para crianças aprenderem o alfabeto português com som e animações",
   "main": "index.html",
   "scripts": {

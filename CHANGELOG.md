@@ -5,6 +5,17 @@ Todas as mudanças notáveis neste projeto serão documentadas neste ficheiro.
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt/1.0.0/),
 e este projeto adere ao [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.1] - 2025-08-24
+
+### 🐛 Corrigido
+- **Pronúncia das vogais** melhorada para português europeu:
+  - **A** - Agora pronuncia "á" corretamente (mais arrastado)
+  - **E** - Corrigido de "i" para "é"
+  - **O** - Som "ó" mais longo e arrastado
+  - **U** - Som "ú" mais demorado e percetível
+- **Configurações de fala** otimizadas para vogais (velocidade mais lenta, tom ajustado)
+- **Mapeamento de pronúncia** customizado para garantir sons corretos
+
 ## [1.0.0] - 2023-08-23
 
 ### ✨ Adicionado

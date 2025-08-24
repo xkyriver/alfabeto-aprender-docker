@@ -1,7 +1,7 @@
 /*
  * Alfabeto Aprender - Jogo Educativo Interativo
  * Autor: xkyriver
- * Versão: 1.0.0
+ * Versão: 1.0.1
  * Licença: MIT
  * 
  * Jogo interativo para crianças aprenderem o alfabeto português
@@ -237,8 +237,20 @@ class AlphabetGame {
         
         // Aguardar um pouco para garantir que parou
         setTimeout(() => {
-            // Criar nova utterance
-            this.speechUtterance = new SpeechSynthesisUtterance(this.currentLetter);
+            // Mapeamento de pronúncia correta para português europeu
+            const pronunciationMap = {
+                'A': 'áááá',      // Som "á" mais longo
+                'E': 'éééé',      // Som "é" em vez de "i"
+                'I': 'ííí',       // Som "í" 
+                'O': 'óóóó',      // Som "ó" mais longo
+                'U': 'úúúú'       // Som "ú" mais longo
+            };
+            
+            // Usar pronunciação customizada para vogais ou letra original para consoantes
+            const textToSpeak = pronunciationMap[this.currentLetter] || this.currentLetter;
+            
+            // Criar nova utterance com texto corrigido
+            this.speechUtterance = new SpeechSynthesisUtterance(textToSpeak);
             
             // Usar voz selecionada se disponível
             if (this.selectedVoice) {
@@ -246,14 +258,22 @@ class AlphabetGame {
                 console.log('Usando voz:', this.selectedVoice.name);
             }
             
-            // Configurações de fala otimizadas
-            this.speechUtterance.rate = 0.7; // Mais lento ainda
-            this.speechUtterance.pitch = 1.3; // Tom mais alto
+            // Configurações de fala otimizadas para vogais
+            if (pronunciationMap[this.currentLetter]) {
+                // Configurações especiais para vogais
+                this.speechUtterance.rate = 0.5;  // Ainda mais lento para vogais
+                this.speechUtterance.pitch = 1.2; // Tom ligeiramente mais baixo
+            } else {
+                // Configurações normais para consoantes
+                this.speechUtterance.rate = 0.7;
+                this.speechUtterance.pitch = 1.3;
+            }
+            
             this.speechUtterance.volume = 1.0; // Volume máximo
             this.speechUtterance.lang = 'pt-PT'; // Forçar idioma português
             
             // Logs para debug
-            console.log('Falando letra:', this.currentLetter);
+            console.log('Falando letra:', this.currentLetter, '→', textToSpeak);
             console.log('Configurações:', {
                 rate: this.speechUtterance.rate,
                 pitch: this.speechUtterance.pitch,
