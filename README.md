@@ -1,8 +1,9 @@
 # 🎯 Alfabeto Aprender - Jogo Educativo Interativo
 
-![Versão](https://img.shields.io/badge/versão-1.0.0-blue)
+![Versão](https://img.shields.io/badge/versão-1.1.0-blue)
 ![Licença](https://img.shields.io/badge/licença-MIT-green)
 ![Plataforma](https://img.shields.io/badge/plataforma-Web%2FTablet-orange)
+![Qualidade](https://img.shields.io/badge/qualidade_som-Google_TTS-brightgreen)
 
 Uma aplicação web interativa e divertida para ajudar crianças do primeiro ano a aprender o alfabeto português através de jogos com som, animações e feedback visual.
 
@@ -16,9 +17,12 @@ Uma aplicação web interativa e divertida para ajudar crianças do primeiro ano
 
 ### 🔊 **Áudio e Síntese de Voz**
 - **Pronunciação automática** das letras em português
+- **Google Text-to-Speech** para letra "O" com qualidade PT-PT superior
+- **Sistema de fallback automático** garante funcionamento offline
 - **Botão para repetir** o som da letra atual
 - **Vozes portuguesas** quando disponíveis
 - **Sons personalizados** de sucesso, erro e vitória
+- **Métodos especializados** para letras problemáticas (U, O)
 
 ### ✨ **Animações e Feedback**
 - **Animações suaves** para acertos e erros
@@ -46,6 +50,12 @@ Uma aplicação web interativa e divertida para ajudar crianças do primeiro ano
 4. 📈 Vê o progresso na barra superior
 5. 🎉 Celebra quando completares todas as letras!
 
+### **Funcionalidades Avançadas**
+- 🔍 **Sistema de Testes**: Durante o jogo, digita `rabbit` para aceder ao backdoor de testes
+- 🔊 **Teste Individual**: Testa o som de qualquer letra individualmente
+- 🛠️ **Informações Debug**: Vê detalhes técnicos sobre vozes e configurações
+- 🌐 **Qualidade Superior**: Letra "O" usa Google TTS para máxima qualidade
+
 ## 🛠 Estrutura do Projeto
 
 ```
@@ -53,8 +63,12 @@ alfabeto-aprender/
 ├── 📄 index.html      # Estrutura principal da aplicação
 ├── 🎨 styles.css      # Estilos e animações
 ├── ⚙️ script.js       # Lógica do jogo e interatividade
+├── 🔍 backdoor.html   # Página de testes de som
+├── 🔍 backdoor.js     # Sistema de testes debug
+├── 🎨 backdoor.css    # Estilos da página de testes
 ├── 📋 README.md       # Documentação (este ficheiro)
-└── 📦 package.json    # Metadados e versionamento
+├── 📦 package.json    # Metadados e versionamento
+└── 📈 CHANGELOG.md    # Histórico de versões
 ```
 
 ## 🔧 Tecnologias Utilizadas
@@ -88,7 +102,19 @@ alfabeto-aprender/
 
 Este projeto segue **Semantic Versioning** (`MAJOR.MINOR.PATCH`):
 
-### **v1.0.0** (Atual) - Primeira Versão Estável
+### **v1.1.0** (Atual) - Qualidade de Som Melhorada
+- ✨ **Google Text-to-Speech** integrado para letra "O"
+- ✨ **Sistema de testes** com backdoor para debug
+- ✨ **Fallback automático** garante funcionamento offline
+- ✨ **Métodos especializados** para letras problemáticas
+- ✨ **Arquitetura robusta** com tratamento de erros
+- ✨ **Logs informativos** para monitorização
+
+### **v1.0.1** - Correções de Pronunciação
+- 🐛 Pronunciação das vogais melhorada (A, E, I, O, U)
+- 🐛 Configurações de fala otimizadas
+
+### **v1.0.0** - Primeira Versão Estável
 - ✅ Jogo funcional completo
 - ✅ 26 letras do alfabeto
 - ✅ Síntese de voz em português
