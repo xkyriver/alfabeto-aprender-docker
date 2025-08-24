@@ -96,28 +96,6 @@ Este projeto segue **Semantic Versioning** (`MAJOR.MINOR.PATCH`):
 - ✅ Design responsivo para tablets
 - ✅ Sons de sucesso/erro/vitória
 
-### **Próximas Versões Planeadas**
-- **v1.1.0** - Melhorias de UX e novas funcionalidades
-- **v1.2.0** - Modos de jogo adicionais
-- **v2.0.0** - Palavras e sílabas
-
-## 📈 Melhorias Futuras
-
-- 🔤 **Modo palavras**: Aprender palavras simples
-- 📊 **Estatísticas**: Acompanhar progresso
-- 🎨 **Temas**: Diferentes cores e estilos
-- 🏆 **Sistema de conquistas**: Motivar aprendizagem
-- 👥 **Modo multi-jogador**: Jogar com amigos
-
-## 🤝 Contribuições
-
-Contribuições são bem-vindas! Para contribuir:
-
-1. Fork o repositório
-2. Cria uma branch para a tua funcionalidade (`git checkout -b feature/nova-funcionalidade`)
-3. Commit as mudanças (`git commit -m 'Adiciona nova funcionalidade'`)
-4. Push para a branch (`git push origin feature/nova-funcionalidade`)
-5. Abre um Pull Request
 
 ## 📄 Licença
 
