@@ -1,3 +1,13 @@
+/*
+ * Alfabeto Aprender - Jogo Educativo Interativo
+ * Autor: xkyriver
+ * Versão: 1.0.0
+ * Licença: MIT
+ * 
+ * Jogo interativo para crianças aprenderem o alfabeto português
+ * com som, animações e feedback visual.
+ */
+
 // Estado do jogo
 class AlphabetGame {
     constructor() {

@@ -96,6 +96,11 @@ Este projeto segue **Semantic Versioning** (`MAJOR.MINOR.PATCH`):
 - ✅ Design responsivo para tablets
 - ✅ Sons de sucesso/erro/vitória
 
+## 👤 Autor
+
+**xkyriver** - *Desenvolvedor principal*
+- 🌐 GitHub: [@xkyriver](https://github.com/xkyriver)
+- 📧 Para questões sobre o projeto, usa as Issues do GitHub
 
 ## 📄 Licença
 
