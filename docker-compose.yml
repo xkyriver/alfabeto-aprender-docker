@@ -1,0 +1,102 @@
+# Docker Compose para Alfabeto Aprender - Template para aplicações web
+# Versão moderna sem campo 'version' (depreciado no Compose v2+)
+
+services:
+  # Aplicação principal
+  alfabeto-aprender:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
+    
+    image: xkyriver/alfabeto-aprender:1.0.1
+    container_name: alfabeto-aprender-app
+    
+    # Reiniciar automaticamente
+    restart: unless-stopped
+    
+    # Portas (mapeamento interno - proxy reverso irá mapear externamente)
+    ports:
+      - "8080:80"  # Porta local para testes
+    
+    # Variáveis de ambiente
+    environment:
+      - NGINX_HOST=localhost
+      - NGINX_PORT=80
+      - NGINX_WORKER_PROCESSES=2
+      - NGINX_WORKER_CONNECTIONS=1024
+      - TZ=Europe/Lisbon
+    
+    # Volumes para logs e possível configuração personalizada
+    volumes:
+      # Logs do nginx (útil para debug)
+      - nginx_logs:/var/log/nginx
+      
+      # Configuração personalizada (se quiser sobrescrever)
+      # - ./docker/nginx-custom.conf:/etc/nginx/nginx.conf:ro
+      
+      # Volume para desenvolvimento (descomente para desenvolvimento)
+      # - .:/usr/share/nginx/html:ro
+    
+    # Health check
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    
+    # Limites de recursos
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+        reservations:
+          cpus: '0.1'
+          memory: 64M
+    
+    # Labels para organização
+    labels:
+      - "traefik.enable=false"  # Se usar Traefik no futuro
+      - "app.name=alfabeto-aprender"
+      - "app.version=1.0.1"
+      - "app.description=Jogo educativo para aprender alfabeto"
+      - "maintainer=xkyriver"
+
+  # Opcional: Serviço de monitorização simples (pode ser removido)
+  watchtower:
+    image: containrrr/watchtower:1.7.1
+    container_name: alfabeto-watchtower
+    restart: unless-stopped
+    
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    
+    # Verificar atualizações a cada 24 horas
+    environment:
+      - WATCHTOWER_POLL_INTERVAL=86400
+      - WATCHTOWER_CLEANUP=true
+      - WATCHTOWER_INCLUDE_STOPPED=true
+    
+    # Labels
+    labels:
+      - "app.service=watchtower"
+      - "app.description=Atualizações automáticas de containers"
+    
+    # Executar apenas se explicitamente solicitado
+    profiles:
+      - monitoring
+
+# Networks (usando network padrão - bridge)
+networks:
+  default:
+    driver: bridge
+    name: alfabeto-network
+
+# Volumes nomeados
+volumes:
+  nginx_logs:
+    driver: local
+    name: alfabeto-nginx-logs

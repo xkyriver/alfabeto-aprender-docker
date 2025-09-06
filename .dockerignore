@@ -1,0 +1,45 @@
+# Docker ignore file - ficheiros a excluir do build context
+
+# Documentação
+*.md
+!README.md
+
+# Scripts PowerShell (não necessários em produção)
+*.ps1
+
+# Ficheiros de configuração Git
+.git
+.gitignore
+.gitattributes
+
+# Logs
+*.log
+
+# Ficheiros temporários
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+
+# Node modules (se existir)
+node_modules/
+npm-debug.log*
+
+# Backups
+*.backup
+*.bak
+
+# Docker próprios
+Dockerfile
+docker-compose*.yml
+.dockerignore
+
+# Ficheiros específicos do projeto que não são necessários
+teste.txt
+CHANGELOG.md
+ALTERACOES-FINAIS.md
+LETRA-A-CORRIGIDA.md
+README-*.md
+
+# Diretório de desenvolvimento
+docker/logs/
