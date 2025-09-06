@@ -1,13 +1,30 @@
-# 🎯 Alfabeto Aprender - Jogo Educativo Interativo
+# 🎯 Alfabeto Aprender - Docker Edition
 
-![Versão](https://img.shields.io/badge/versão-2.1.0_MP3-blue)
+![Versão](https://img.shields.io/badge/versão-2.1.0_Docker-blue)
 ![Licença](https://img.shields.io/badge/licença-MIT-green)
-![Plataforma](https://img.shields.io/badge/plataforma-Web%2FTablet-orange)
+![Plataforma](https://img.shields.io/badge/plataforma-Docker%2FWeb-orange)
 ![Qualidade](https://img.shields.io/badge/qualidade_som-MP3_PT--PT-brightgreen)
+![Docker](https://img.shields.io/badge/docker-ready-blue)
 
 Uma aplicação web interativa e divertida para ajudar crianças do primeiro ano a aprender o alfabeto português através de jogos com som, animações e feedback visual.
 
-🎵 **Nova Versão 2.1.0 MP3**: Sistema de áudio completamente renovado com ficheiros MP3 uniformes em PT-PT, eliminando conflitos entre speakers/phones e garantindo qualidade profissional.
+🐳 **Versão Docker 2.1.0**: Sistema completamente containerizado com Nginx, ficheiros MP3 uniformes em PT-PT, deployment automatizado e configuração profissional para produção.
+
+🎵 **Sistema de Áudio MP3**: Qualidade profissional com ficheiros uniformes Google TTS PT-PT, eliminando conflitos entre speakers/phones.
+
+## 🚀 Quick Start com Docker
+
+```bash
+# Clonar repositório
+git clone https://github.com/xkyriver/alfabeto-aprender-docker.git
+cd alfabeto-aprender-docker
+
+# Executar com Docker Compose
+docker-compose up --build
+
+# Abrir no navegador
+open http://localhost:8080
+```
 
 ## 🌟 Funcionalidades
 

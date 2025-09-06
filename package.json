@@ -1,7 +1,7 @@
 {
-  "name": "alfabeto-aprender",
+  "name": "alfabeto-aprender-docker",
   "version": "1.0.1",
-  "description": "Jogo interativo para crianças aprenderem o alfabeto português com som e animações",
+  "description": "Jogo interativo para crianças aprenderem o alfabeto português com som e animações - Versão Dockerizada",
   "main": "index.html",
   "scripts": {
     "start": "start index.html",
@@ -24,9 +24,9 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/[SEU-USUARIO]/alfabeto-aprender.git"
+    "url": "https://github.com/xkyriver/alfabeto-aprender-docker.git"
   },
-  "homepage": "https://[SEU-USUARIO].github.io/alfabeto-aprender",
+  "homepage": "https://github.com/xkyriver/alfabeto-aprender-docker",
   "engines": {
     "node": ">=12.0.0"
   },
