@@ -9,8 +9,8 @@ LABEL build.date="2025-01-06"
 
 # Instalar ferramentas de build se necessário (para futuras apps)
 RUN apk add --no-cache \
-    curl=8.11.1-r0 \
-    wget=1.25.0-r0
+    curl \
+    wget
 
 # Copiar código fonte para stage de build
 WORKDIR /build
@@ -29,10 +29,10 @@ LABEL version="1.0.1"
 LABEL app.name="alfabeto-aprender"
 LABEL app.type="static-web"
 
-# Instalar ferramentas úteis para debug/manutenção (versões específicas)
+# Instalar ferramentas úteis para debug/manutenção
 RUN apk add --no-cache \
-    curl=8.11.0-r2 \
-    nano=8.2-r0
+    curl \
+    nano
 
 # Copiar aplicação do stage de build
 COPY --from=builder /build /usr/share/nginx/html/
